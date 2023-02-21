@@ -309,7 +309,7 @@
         </div> -->
         <div class="item">
           <p>Notes</p>
-          <textarea rows="3"></textarea>
+          <textarea rows="3" name="note"></textarea>
         </div>
         <div class="btn-block">
           <button type="submit" href="/">SEND</button>

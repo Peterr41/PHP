@@ -28,6 +28,7 @@
                     <th scope="col">Country</th>
                     <th scope="col">Pick Up Date</th>
                     <th scope="col">Pick Up Time</th>
+                    <th scope="col">Notes</th>
                     
                 </tr>
             </thead>
@@ -44,6 +45,7 @@
                     <td><?php echo $_POST["Country"] ?></td>
                     <td><?php echo $_POST["bdate"] ?></td>
                     <td><?php echo $_POST["btime"] ?></td>
+                    <td><?php echo $_POST["note"] ?></td>
                 </tr>
             </tbody>
             

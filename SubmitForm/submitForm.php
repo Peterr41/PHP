@@ -26,6 +26,7 @@
                     <th scope="col">Region</th>
                     <th scope="col">Postal/Zip code</th>
                     <th scope="col">Country</th>
+                    <th scope="col">Vehicle</th>
                     <th scope="col">Pick Up Date</th>
                     <th scope="col">Pick Up Time</th>
                     <th scope="col">Notes</th>
@@ -43,8 +44,9 @@
                     <td><?php echo $_POST["Region"] ?></td>
                     <td><?php echo $_POST["Postal"] ?></td>
                     <td><?php echo $_POST["Country"] ?></td>
-                    <td><?php echo $_POST["bdate"] ?></td>
-                    <td><?php echo $_POST["btime"] ?></td>
+                    <td><?php echo $_POST["vehicle"] ?></td>
+                    <td><?php echo $_POST["date"] ?></td>
+                    <td><?php echo $_POST["time"] ?></td>
                     <td><?php echo $_POST["note"] ?></td>
                 </tr>
             </tbody>

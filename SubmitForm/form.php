@@ -184,29 +184,62 @@
     </style>
   </head>
   <body>
+    <!-- PHP Here -->
+    <?php require 'connect.php'; ?>
+    <?php 
+      $name = $email = $phone = $number = $strAddress = $city = $region = $postal = $country = $vehicle = $date = $time = $note = "";
+      $nameErr = $emailErr = $phoneErr = $numberErr = $strAddressErr = $cityErr = $regionErr = $postalErr = $countryErr = $vehicleErr = $dateErr = $timeErr = $noteErr = "";
+    ?>
+    <?php 
+      if(isset($_POST['submit'])){
+        
+        $name = $_POST['Last'].' '.$_POST['First'];
+        $email = $_POST['Email'];
+        $phone = $_POST['Phone'];
+        $number = $_POST['numberofPassengers'];
+        $strAddress = $_POST['strAddress'];
+        $city = $_POST['City'];
+        $region = $_POST['Region'];
+        $postal = $_POST['Postal'];
+        $country = $_POST['Country'];
+        $vehicle = $_POST['vehicle'];
+        $date = $_POST['date'];
+        $time = $_POST['time'];
+        $note = $_POST['note'];
+
+        if($conn -> query("INSERT INTO infor (Name, Email, Phone, NumberofPassengers, StreetAddress, City, Region, Postal, Country, Vehicle, PickupDate, PickupTime, Notes) 
+        VALUES (N'$name' ,N'$email' ,N'$phone' ,N'$number' ,N'$strAddress' ,N'$city' ,N'$region' ,N'$postal' ,N'$country',N'$vehicle' ,N'$date' ,N'$time' ,N'$note')")) {
+          echo "<script>alert('Success!')</script>";
+
+        }else{
+          echo "<script>alert('Failed!')</script>";
+        }
+      }
+      $conn -> close();
+    ?>
     <div class="testbox">
-      <form action="submitForm.php" method="post">
+      <form action="" method="post">
         <div class="banner">
           <h1>Car Booking Form</h1>
         </div>
         <div class="item">
           <p>Name</p>
           <div class="name-item">
-            <input type="text" name="First" placeholder="First" />
-            <input type="text" name="Last" placeholder="Last" />
+            <input type="text" name="First" placeholder="First" required />
+            <input type="text" name="Last" placeholder="Last" required/>
           </div>
         </div>
         <div class="item">
           <p>Email</p>
-          <input type="text" name="Email" placeholder="Your Email"/>
+          <input type="email" name="Email" placeholder="Your Email" required/>
         </div>
         <div class="item">
           <p>Phone</p>
-          <input type="number" name="Phone"/>
+          <input type="number" name="Phone" required/>
         </div>
         <div class="item">
           <p>Number of Passengers</p>
-          <input type="number" name="numberofPassengers"/>
+          <input type="number" name="numberofPassengers" required/>
         </div>
         <div class="item">
           <p>Contact Address</p>
@@ -214,8 +247,8 @@
           <div class="city-item">
             <input type="text" name="City" placeholder="City" />
             <input type="text" name="Region" placeholder="Region" />
-            <input type="text" name="Postal" placeholder="Postal / Zip code" />
-            <select name="Country">
+            <input type="number" name="Postal" placeholder="Postal / Zip code" />
+            <select name="Country" required>
               <option value="">Country</option>
               <option value="Russia">Russia</option>
               <option value="Germany">Germany</option>
@@ -225,96 +258,48 @@
             </select>
           </div>
         </div>
-        <div class="question" name="vehicle1">
+        <div class="question" >
           <p>Vehicle</p>
-          <div class="question-answer">
+          <div class="question-answer"  >
             <div>
-              <input type="radio" value="none" id="radio_1" name="vehicle" />
+              <input type="radio" value="Limousine (8-12 person)" id="radio_1" name="vehicle" required   />
               <label for="radio_1" class="radio"><span>Limousine (8-12 person)</span></label>
             </div>
             <div>
-              <input type="radio" value="none" id="radio_2" name="vehicle" />
+              <input type="radio" value="SUV (6-7 person)" id="radio_2" name="vehicle"   />
               <label for="radio_2" class="radio"><span>SUV (6-7 person)</span></label>
             </div>
             <div>
-              <input type="radio" value="none" id="radio_3" name="vehicle" />
+              <input type="radio" value="Van (12-15 person)" id="radio_3" name="vehicle"   />
               <label for="radio_3" class="radio"><span>Van (12-15 person)</span></label>
             </div>
             <div>
-              <input type="radio" value="none" id="radio_4" name="vehicle" />
+              <input type="radio" value="Bus (50+ person)" id="radio_4" name="vehicle"   />
               <label for="radio_4" class="radio"><span>Bus (50+ person)</span></label>
             </div>
-            <div>
-              <input type="radio" value="none" id="radio_5" name="vehicle" />
-              <label for="radio_5" class="radio other"><span>other:</span></label>
-              <input class="other" type="text" name="name" />
-            </div>
+            
           </div>
         </div>
         <div class="item">
           <p>Pick Up Date</p>
-          <input type="date" name="bdate" />
+          <input type="date" name="date" required />
           <i class="fas fa-calendar-alt"></i>
         </div>
         <div class="item">
           <p>Pick Up Time</p>
-          <input type="time" name="btime" />
+          <input type="time" name="time" required />
           <i class="fas fa-clock"></i>
         </div>
-        <!-- <div class="item">
-          <p>If pick up from the airport, please enter airport name</p>
-          <input type="text" name="name"/>
-        </div>
-        <div class="item">
-          <p>Flight Number</p>
-          <input type="text" name="name"/>
-        </div>
-        <div class="item">
-          <p>Pick Up Point</p>
-          <input type="text" name="name" placeholder="Street address" />
-          <input type="text" name="name" placeholder="Street address line 2" />
-          <div class="city-item">
-            <input type="text" name="name" placeholder="City" />
-            <input type="text" name="name" placeholder="Region" />
-            <input type="text" name="name" placeholder="Postal / Zip code" />
-            <select>
-              <option value="">Country</option>
-              <option value="1">Russia</option>
-              <option value="2">Germany</option>
-              <option value="3">France</option>
-              <option value="4">Armenia</option>
-              <option value="5">USA</option>
-              <option value="6">VietNam</option>
-            </select>
-          </div>
-        </div>
-        <div class="item">
-          <p>Destination</p>
-          <input type="text" name="name" placeholder="Street address" />
-          <input type="text" name="name" placeholder="Street address line 2" />
-          <div class="city-item">
-            <input type="text" name="name" placeholder="City" />
-            <input type="text" name="name" placeholder="Region" />
-            <input type="text" name="name" placeholder="Postal / Zip code" />
-            <select>
-              <option value="">Country</option>
-              <option value="1">Russia</option>
-              <option value="2">Germany</option>
-              <option value="3">France</option>
-              <option value="4">Armenia</option>
-              <option value="5">USA</option>
-              <option value="6">VietNam</option>
-            </select>
-          </div>
-        </div> -->
+        
         <div class="item">
           <p>Notes</p>
           <textarea rows="3" name="note"></textarea>
         </div>
         <div class="btn-block">
-          <button type="submit" href="/">SEND</button>
+          <button type="submit" name="submit" >SEND</button>
         </div>
       </form>
     </div>
+    
   </body>
 </html>
